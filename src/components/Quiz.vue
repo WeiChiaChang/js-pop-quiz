@@ -3,9 +3,12 @@
     <transition name="fade" mode="out-in" v-if="!loading">
       <div :key="currentQuestion">
         <div class="quiz-counter" v-if="stage === 'quiz'">{{currentQuestion}} / {{questions.length}}</div>
-        <Picture class="quiz-img" :url="img"/>
-        <!-- <h1 class="quiz-heading" v-html="title"></h1> -->
-        <h1 class="quiz-heading" v-html="snarkdown(questions[currentQuestion-1].title)"></h1>
+        <!-- <Picture class="quiz-img" :url="img"/> -->
+        <Code />
+        <h1
+          class="quiz-heading"
+          v-html="snarkdown(questions[currentQuestion-1].title)"
+        ></h1>
         <a
           href="#start-quiz"
           class="quiz-button"
@@ -54,18 +57,17 @@
 </template>
 
 <script>
-import { store, mutations, actions } from "../store";
-import { version as appVersion } from "../../package.json";
-import Picture from "./Picture";
+import { store, mutations, actions } from "../store"
+import { version as appVersion } from "../../package.json"
+import Code from './Code'
 import snarkdown from '../utils/snarkdown'
 
-const welcomeImg =
-  "https://i.redd.it/fdcgqvipw2z01.png";
+const welcomeImg = "https://i.redd.it/fdcgqvipw2z01.png"
 
 export default {
   name: "Quiz",
   components: {
-    Picture
+    Code
   },
   data () {
     return {

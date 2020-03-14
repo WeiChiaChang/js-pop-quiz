@@ -9,7 +9,7 @@
         5
       ],
       "img": "https://media1.giphy.com/media/26BRzozg4TCBXv6QU/giphy.gif",
-      "title": "134. How can we invoke `sum` in `index.js` from `sum.js?`",
+      "title": "1. What's the output ?",
       "code":
         "function sayHi() {\n  console.log(name);\n  console.log(age);\n  var name = 'Lydia';\n  let age = 21;\n}\n\nsayHi();",
       "options": [
