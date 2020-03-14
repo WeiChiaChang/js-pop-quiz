@@ -4,6 +4,7 @@
       <div :key="currentQuestion">
         <div class="quiz-counter" v-if="stage === 'quiz'">{{currentQuestion}} / {{questions.length}}</div>
         <Picture class="quiz-img" :url="img"/>
+        <!-- <img height="200" :src="img" alt=""> -->
         <h1 class="quiz-heading" v-html="title"></h1>
         <a
           href="#start-quiz"
@@ -289,23 +290,21 @@ export default {
 }
 .quiz-question-button {
   width: 100%;
-  padding: 15px;
-  border: 1px solid rgba(238, 238, 238, 0.3);
+  padding: 13px;
+  border: 2px solid rgba(238, 238, 238, 0.3);
   border-radius: 0;
   background: transparent;
   color: #eee;
-  font-size: 11px;
+  font-size: .8rem;
   cursor: pointer;
   transition: border-color 0.5s, background 0.5s;
   outline: none;
 }
 
 .quiz-question-button.correct {
-  border-color: #5ba55b;
   background: #5ba55b;
 }
 .quiz-question-button.wrong {
-  border-color: #cc5454;
   background: #cc5454;
 }
 @media (min-width: 600px) {
