@@ -4,8 +4,8 @@
       <div :key="currentQuestion">
         <div class="quiz-counter" v-if="stage === 'quiz'">{{currentQuestion}} / {{questions.length}}</div>
         <Picture class="quiz-img" :url="img"/>
-        <!-- <img height="200" :src="img" alt=""> -->
-        <h1 class="quiz-heading" v-html="title"></h1>
+        <!-- <h1 class="quiz-heading" v-html="title"></h1> -->
+        <h1 class="quiz-heading" v-html="snarkdown(questions[currentQuestion-1].title)"></h1>
         <a
           href="#start-quiz"
           class="quiz-button"
@@ -23,14 +23,26 @@
         <ul class="quiz-questions" v-if="stage === 'quiz'">
           <li
             class="quiz-question"
-            v-for="(answer, i) in questions[currentQuestion-1].answers"
+            v-for="(answer, i) in questions[currentQuestion-1].options"
             :key="i"
           >
+            <!-- <button
+              class="quiz-question-button"
+              :class="{
+                'correct': usersAnswer === answer && answer === questions[currentQuestion-1].correct ,
+                'wrong': usersAnswer === answer && usersAnswer !== questions[currentQuestion-1].correct
+              }"
+              @click="handleAnswer(answer)"
+            >{{moviesTitles[answer-1]}}</button> -->
             <button
               class="quiz-question-button"
-              :class="{'correct': usersAnswer === answer && answer === questions[currentQuestion-1].correct , 'wrong': usersAnswer === answer && usersAnswer !== questions[currentQuestion-1].correct}"
+              :class="{
+                'correct': usersAnswer === answer && answer === questions[currentQuestion-1].correct ,
+                'wrong': usersAnswer === answer && usersAnswer !== questions[currentQuestion-1].correct
+              }"
               @click="handleAnswer(answer)"
-            >{{moviesTitles[answer-1]}}</button>
+              v-html="snarkdown(answer.text)"
+            ></button>
           </li>
         </ul>
       </div>
@@ -45,32 +57,25 @@
 import { store, mutations, actions } from "../store";
 import { version as appVersion } from "../../package.json";
 import Picture from "./Picture";
+import snarkdown from '../utils/snarkdown'
 
 const welcomeImg =
   "https://i.redd.it/fdcgqvipw2z01.png";
 
 export default {
   name: "Quiz",
-  components: { Picture },
+  components: {
+    Picture
+  },
   data () {
     return {
       loading: true,
-      usersAnswer: null,
-      moviesTitles: [
-        "Harry Potter and the Philosopher's Stone",
-        "Harry Potter and the Chamber of Secrets",
-        "Harry Potter and the Prisoner of Azkaban",
-        "Harry Potter and the Goblet of Fire",
-        "Harry Potter and the Order of the Phoenix",
-        "Harry Potter and the Half-Blood Prince",
-        "Harry Potter and the Deathly Hallows – Part 1",
-        "Harry Potter and the Deathly Hallows – Part 2"
-      ]
+      usersAnswer: null
     };
   },
   computed: {
     stage: () => store.stage,
-    title: () => store.title,
+    // title: () => store.title,
     img: () => store.img,
     questions: () => store.questions,
     currentQuestion: () => store.currentQuestion,
@@ -190,6 +195,9 @@ export default {
       const img = this.questions[i - 1].img;
       mutations.setImg(img);
       mutations.setCurrentQuestion(i);
+    },
+    snarkdown (text) {
+      return snarkdown(text)
     }
   },
   watch: {
@@ -238,13 +246,13 @@ export default {
 
 .quiz-heading {
   margin: 20px 0;
-  font-size: 20px;
-  line-height: 1.2;
+  font-size: 1.5rem;
+  line-height: 1.8;
 }
 @media (min-width: 600px) {
   .quiz-heading {
     margin: -40px 0 30px;
-    font-size: 30px;
+    font-size: 1.5rem;
     text-shadow: 1px 1px 2px #020815;
   }
 }

@@ -33,6 +33,14 @@ export default {
 @import url("https://fonts.googleapis.com/css?family=Merriweather:400,700");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css");
 
+code {
+  color: #cda869;
+  // color: #42b883;
+  text-shadow: initial;
+  border-radius: 3px;
+  font-family: "Merriweather";
+}
+
 * {
   box-sizing: border-box;
 }
