@@ -143,7 +143,7 @@ export default {
     },
     initWelcomeStage() {
       mutations.setStage("welcome");
-      mutations.setTitle("How Well Do You Know <br>the Harry Potter Movies?");
+      mutations.setTitle("How Well Do You Know <br>JavaScript ?");
       mutations.setImg(welcomeImg);
       mutations.setCurrentQuestion(0);
       mutations.resetAnswers();

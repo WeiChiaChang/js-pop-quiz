@@ -3,7 +3,7 @@
     <header class="app-header">
       <span class="app-header-text">
         Show on
-        <a href="https://github.com/dmtrbrl/hp-quiz">Github</a>
+        <a href="https://github.com/WeiChiaChang/pop-quiz">GitHub</a>
       </span>
       <h1 class="app-heading">
         <svg
@@ -30,8 +30,8 @@
         <span>Pop Quiz</span>
       </h1>
       <span class="app-header-text">
-        Thanks
-        <a href="https://giphy.com/" target="_blank">GIPHY</a> for the gifs
+        Thanks To
+        <a href="https://github.com/lydiahallie/javascript-questions" target="_blank">Lydia Hallie</a>
       </span>
     </header>
     <Quiz url="https://api.jsonbin.io/b/5cdd1762dbffad51f8aa85a5" />
