@@ -1,0 +1,238 @@
+{
+  "questions": [
+    {
+      "correct": 3,
+      "answers": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "img": "https://media1.giphy.com/media/26BRzozg4TCBXv6QU/giphy.gif",
+      "title": "1. What's the output?",
+      "code":
+        "function sayHi() {\n  console.log(name);\n  console.log(age);\n  var name = 'Lydia';\n  let age = 21;\n}\n\nsayHi();",
+      "options": [
+        {
+          "correct": false,
+          "text": "`Lydia` and `undefined`"
+        },
+        {
+          "correct": false,
+          "text": "`Lydia` and `ReferenceError`"
+        },
+        {
+          "correct": false,
+          "text": "`ReferenceError` and `21`"
+        },
+        {
+          "correct": true,
+          "text": "`undefined` and `ReferenceError`"
+        }
+      ],
+      "explanation":
+        "Within the function, we first declare the `name` variable with the `var` keyword. This means that the variable gets hoisted (memory space is set up during the creation phase) with the default value of `undefined`, until we actually get to the line where we define the variable. We haven't defined the variable yet on the line where we try to log the `name` variable, so it still holds the value of `undefined`.\n\nVariables with the `let` keyword (and `const`) are hoisted, but unlike `var`, don't get <i>initialized</i>. They are not accessible before the line we declare (initialize) them. This is called the \"temporal dead zone\". When we try to access the variables before they are declared, JavaScript throws a `ReferenceError`."
+    },
+    {
+      "correct": 3,
+      "answers": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "img": "https://media1.giphy.com/media/26BRzozg4TCBXv6QU/giphy.gif"
+    },
+    {
+      "correct": 7,
+      "answers": [
+        6,
+        5,
+        7,
+        8
+      ],
+      "img": "https://media2.giphy.com/media/Th8FaGYsmPMwU/giphy.gif"
+    },
+    {
+      "correct": 6,
+      "answers": [
+        6,
+        2,
+        4,
+        5
+      ],
+      "img": "https://media2.giphy.com/media/10FzkePmCE8aGI/giphy.gif"
+    },
+    {
+      "correct": 1,
+      "answers": [
+        1,
+        3,
+        2,
+        4
+      ],
+      "img": "https://media1.giphy.com/media/RyLtUMBdogHvO/giphy.gif"
+    },
+    {
+      "correct": 2,
+      "answers": [
+        3,
+        1,
+        4,
+        2
+      ],
+      "img": "https://media3.giphy.com/media/vaZstE8fqLfiw/giphy.gif"
+    },
+    {
+      "correct": 4,
+      "answers": [
+        2,
+        4,
+        3,
+        1
+      ],
+      "img": "https://media.giphy.com/media/be9hVXfHIcPgk/giphy.gif"
+    },
+    {
+      "correct": 3,
+      "answers": [
+        5,
+        2,
+        1,
+        3
+      ],
+      "img": "https://media3.giphy.com/media/xpBiaXFbVUtTa/giphy.gif"
+    },
+    {
+      "correct": 2,
+      "answers": [
+        1,
+        2,
+        5,
+        3
+      ],
+      "img": "https://media2.giphy.com/media/AFZgmywhfOhiw/giphy.gif"
+    },
+    {
+      "correct": 8,
+      "answers": [
+        7,
+        6,
+        8,
+        5
+      ],
+      "img": "https://media3.giphy.com/media/13eD01wPr7iiTC/giphy.gif"
+    },
+    {
+      "correct": 5,
+      "answers": [
+        5,
+        7,
+        6,
+        4
+      ],
+      "img": "https://media1.giphy.com/media/6PNIs8SEcLFeM/giphy.gif"
+    },
+    {
+      "correct": 2,
+      "answers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "img": "https://media3.giphy.com/media/RysBnjlFR0A24/giphy.gif"
+    },
+    {
+      "correct": 6,
+      "answers": [
+        5,
+        4,
+        6,
+        7
+      ],
+      "img": "https://media1.giphy.com/media/cDrBMKdYOYGCA/giphy.gif"
+    },
+    {
+      "correct": 1,
+      "answers": [
+        2,
+        1,
+        3,
+        4
+      ],
+      "img": "https://media3.giphy.com/media/28JHttSYxdtTi/giphy.gif"
+    },
+    {
+      "correct": 8,
+      "answers": [
+        7,
+        8,
+        5,
+        6
+      ],
+      "img": "https://media3.giphy.com/media/u8GY3VxN0uCvS/giphy.gif"
+    },
+    {
+      "correct": 4,
+      "answers": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "img": "https://media.giphy.com/media/DEx5GZXKckaKk/giphy.gif"
+    },
+    {
+      "correct": 7,
+      "answers": [
+        5,
+        6,
+        8,
+        7
+      ],
+      "img": "https://media1.giphy.com/media/NctuFndRsbm4E/giphy.gif"
+    },
+    {
+      "correct": 5,
+      "answers": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "img": "https://media2.giphy.com/media/8kvOqRPhs2P1C/giphy.gif"
+    },
+    {
+      "correct": 3,
+      "answers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "img": "https://media2.giphy.com/media/ZiBZIjVjeXlhC/giphy.gif"
+    },
+    {
+      "correct": 4,
+      "answers": [
+        2,
+        4,
+        3,
+        5
+      ],
+      "img": "https://media2.giphy.com/media/Zl1fSRaVDsnxS/giphy.gif"
+    },
+    {
+      "correct": 5,
+      "answers": [
+        5,
+        6,
+        4,
+        3
+      ],
+      "img": "https://media2.giphy.com/media/3VwZN7OxJ1GMg/giphy.gif"
+    }
+  ],
+  "version": "0.1.0"
+}

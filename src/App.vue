@@ -14,7 +14,7 @@
         <a href="https://github.com/lydiahallie/javascript-questions" target="_blank">Lydia Hallie</a>
       </span>
     </header>
-    <Quiz url="https://api.jsonbin.io/b/5cdd1762dbffad51f8aa85a5" />
+    <Quiz />
   </div>
 </template>
 

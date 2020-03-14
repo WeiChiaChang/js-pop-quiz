@@ -47,17 +47,11 @@ import { version as appVersion } from "../../package.json";
 import Picture from "./Picture";
 
 const welcomeImg =
-  "https://media0.giphy.com/media/Bh3YfliwBZNwk/giphy.gif?cid=3640f6095c852266776c6f746fb2fc67";
+  "https://i.redd.it/fdcgqvipw2z01.png";
 
 export default {
   name: "Quiz",
   components: { Picture },
-  props: {
-    url: {
-      required: true,
-      type: String
-    }
-  },
   data () {
     return {
       loading: true,
@@ -124,10 +118,10 @@ export default {
     }
   },
   methods: {
-    async fetchData() {
-      await actions.fetchData(this.url);
+    async fetchData () {
+      await actions.fetchData();
     },
-    async init() {
+    async init () {
       await this.fetchData();
       if (
         !localStorage.stage ||
@@ -142,7 +136,7 @@ export default {
         this.initResultsStage();
       }
     },
-    initWelcomeStage() {
+    initWelcomeStage () {
       mutations.setStage("welcome");
       mutations.setTitle("How Well Do You Know <br>JavaScript ?");
       mutations.setImg(welcomeImg);
@@ -154,7 +148,7 @@ export default {
 
       this.loading = false;
     },
-    initQuizStage(currentQuestion) {
+    initQuizStage (currentQuestion) {
       mutations.setStage("quiz");
       mutations.setTitle("Which movie is this?");
       mutations.setAnswers(
@@ -165,7 +159,7 @@ export default {
 
       this.loading = false;
     },
-    initResultsStage() {
+    initResultsStage () {
       mutations.setStage("results");
       mutations.setAnswers(localStorage.answers.split(","));
       mutations.setTitle(
@@ -176,7 +170,7 @@ export default {
 
       this.loading = false;
     },
-    handleAnswer(answer) {
+    handleAnswer (answer) {
       if (this.usersAnswer !== null) return;
       this.usersAnswer = answer;
       mutations.addAnswer(answer);
@@ -190,7 +184,7 @@ export default {
         }
       }, 500);
     },
-    goToQuestion(i) {
+    goToQuestion (i) {
       this.usersAnswer = null;
 
       const img = this.questions[i - 1].img;
