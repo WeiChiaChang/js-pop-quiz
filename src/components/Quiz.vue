@@ -4,7 +4,7 @@
       <div :key="currentQuestion">
         <div class="quiz-counter" v-if="stage === 'quiz'">{{currentQuestion}} / {{questions.length}}</div>
         <!-- <Picture class="quiz-img" :url="img"/> -->
-        <Code />
+        <Code :code="questions[currentQuestion-1].code" />
         <h1
           class="quiz-heading"
           v-html="snarkdown(questions[currentQuestion-1].title)"
