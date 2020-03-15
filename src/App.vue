@@ -6,7 +6,7 @@
         <a href="https://github.com/WeiChiaChang/pop-quiz">GitHub</a>
       </span>
       <h1 class="app-heading">
-        <img src="./assets//js-logo.svg" alt="">
+        <img src="./assets/js-logo.svg" alt="">
         <span>Pop Quiz</span>
       </h1>
       <span class="app-header-text">
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import Quiz from "./components/Quiz.vue";
+import Quiz from './components/Quiz.vue'
 
 export default {
   name: "app",

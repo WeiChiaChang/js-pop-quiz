@@ -3,9 +3,22 @@
     <transition name="fade" mode="out-in" v-if="!loading">
       <div :key="currentQuestion">
         <div class="quiz-counter" v-if="stage === 'quiz'">{{currentQuestion}} / {{questions.length}}</div>
-        <!-- <Picture class="quiz-img" :url="img"/> -->
-        <Code :code="questions[currentQuestion-1].code" />
+        <div class="welcome_img_wrapper">
+          <img
+            v-if="stage === 'welcome'"
+            class="quiz-img"
+            :src="welcomeImg"
+            alt=""
+          >
+        </div>
+        <!-- <Picture
+          v-if="stage === 'welcome'"
+          class="quiz-img"
+          :url="welcomeImg"
+        /> -->
+        <Code v-if="stage === 'quiz'" :code="questions[currentQuestion-1].code" />
         <h1
+          v-if="stage === 'quiz'"
           class="quiz-heading"
           v-html="snarkdown(questions[currentQuestion-1].title)"
         ></h1>
@@ -62,8 +75,6 @@ import { version as appVersion } from "../../package.json"
 import Code from './Code'
 import snarkdown from '../utils/snarkdown'
 
-const welcomeImg = "https://i.redd.it/fdcgqvipw2z01.png"
-
 export default {
   name: "Quiz",
   components: {
@@ -72,7 +83,8 @@ export default {
   data () {
     return {
       loading: true,
-      usersAnswer: null
+      usersAnswer: null,
+      welcomeImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/512px-Unofficial_JavaScript_logo_2.svg.png'
     };
   },
   computed: {
@@ -146,7 +158,7 @@ export default {
     initWelcomeStage () {
       mutations.setStage("welcome");
       mutations.setTitle("How Well Do You Know <br>JavaScript ?");
-      mutations.setImg(welcomeImg);
+      mutations.setImg(this.welcomeImg);
       mutations.setCurrentQuestion(0);
       mutations.resetAnswers();
 
@@ -240,10 +252,15 @@ export default {
   }
 }
 
+.welcome_img_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .quiz-img {
   display: block;
-  width: 100%;
-  height: auto;
+  width: 200px;
+  margin-bottom: 1rem;
 }
 
 .quiz-heading {
