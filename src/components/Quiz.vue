@@ -235,7 +235,7 @@ export default {
 
 .quiz-counter {
   position: absolute;
-  top: 0;
+  top: -25px;
   left: 50%;
   transform: translateX(-50%);
   text-shadow: 1px 1px 2px #020815;
