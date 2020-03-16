@@ -45,11 +45,11 @@
             <button
               class="quiz-question-button"
               :class="{
-                'correct': usersAnswer === answer && answer === questions[currentQuestion-1].correct,
-                'wrong': usersAnswer === answer && usersAnswer !== questions[currentQuestion-1].correct
+                'correct': usersAnswer === answer.correct && answer.correct === true,
+                'wrong': usersAnswer === answer.correct && usersAnswer !== true
               }"
               @click="handleAnswer(answer)"
-              v-html="snarkdown(answer.text)"
+              v-html="snarkdown(answer.correct + answer.text)"
             ></button>
           </li>
         </ul>
@@ -94,6 +94,14 @@ export default {
       return count;
     },
     resultsInfo () {
+      if (this.correctAnswers === 0) {
+        return {
+          text:
+            "0 time!",
+          img:
+            "https://media0.giphy.com/media/720g7C1jz13wI/giphy.gif?cid=3640f6095c869951776a4a7a5110b5dc"
+        };
+      }
       if (this.correctAnswers < 10) {
         return {
           text:
@@ -182,9 +190,10 @@ export default {
       this.loading = false;
     },
     handleAnswer (answer) {
+      let { correct } = answer
       if (this.usersAnswer !== null) return;
-      this.usersAnswer = answer;
-      mutations.addAnswer(answer);
+      this.usersAnswer = correct;
+      mutations.addAnswer(correct);
       const nextQuestion = +this.currentQuestion + 1;
 
       setTimeout(() => {
