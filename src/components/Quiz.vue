@@ -45,11 +45,11 @@
             <button
               class="quiz-question-button"
               :class="{
-                'correct': usersAnswer === answer.correct && answer.correct === true,
-                'wrong': usersAnswer === answer.correct && usersAnswer !== true
+                'correct': usersAnswer === i && usersAnswer === questions[currentQuestion-1].options.findIndex(i => i.correct === true),
+                'wrong': usersAnswer === i && usersAnswer !== questions[currentQuestion-1].options.findIndex(i => i.correct === true)
               }"
-              @click="handleAnswer(answer)"
-              v-html="snarkdown(answer.correct + answer.text)"
+              @click="handleAnswer(i)"
+              v-html="snarkdown(answer.text)"
             ></button>
           </li>
         </ul>
@@ -89,19 +89,14 @@ export default {
     correctAnswers() {
       let count = 0;
       this.questions.forEach((q, i) => {
-        if (q.correct == this.answers[i]) count++;
+        if (q.options.findIndex(item => item.correct === true) == this.answers[i]) {
+          count++
+        }
+        // if (q.correct == this.answers[i]) count++;
       });
       return count;
     },
     resultsInfo () {
-      if (this.correctAnswers === 0) {
-        return {
-          text:
-            "0 time!",
-          img:
-            "https://media0.giphy.com/media/720g7C1jz13wI/giphy.gif?cid=3640f6095c869951776a4a7a5110b5dc"
-        };
-      }
       if (this.correctAnswers < 10) {
         return {
           text:
@@ -189,11 +184,10 @@ export default {
 
       this.loading = false;
     },
-    handleAnswer (answer) {
-      let { correct } = answer
+    handleAnswer (answerIndex) {
       if (this.usersAnswer !== null) return;
-      this.usersAnswer = correct;
-      mutations.addAnswer(correct);
+      this.usersAnswer = answerIndex;
+      mutations.addAnswer(answerIndex);
       const nextQuestion = +this.currentQuestion + 1;
 
       setTimeout(() => {
