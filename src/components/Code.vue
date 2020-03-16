@@ -1,5 +1,5 @@
 <template>
-  <div class="code_wrapper">
+  <div class="code_wrapper" v-if="code">
 		<pre v-html="highlighter(code)"></pre>
 	</div>
 </template>
@@ -31,7 +31,7 @@ export default {
 <style lang="scss" scoped>
 .code_wrapper {
   height: 240px;
-	// overflow-y: scroll;
+	overflow-y: scroll;
 	background-color: rgb(24, 30, 36);
 	border-radius: 4px;
 	padding: 15px 20px;

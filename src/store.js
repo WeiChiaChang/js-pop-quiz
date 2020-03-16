@@ -1,4 +1,5 @@
 import Vue from "vue";
+import quiz from './data/questions'
 
 export const store = Vue.observable({
   quizVersion: null,
@@ -41,11 +42,15 @@ export const mutations = {
 };
 
 export const actions = {
-  async fetchData() {
-    // let res = await fetch('https://api.jsonbin.io/b/5cdd1762dbffad51f8aa85a5')
-    let res = await fetch(`./data.json`)
-    res = await res.json()
-    mutations.setQuizVersion(res.version)
-    mutations.setQuestions(res.questions)
+  // async fetchData() {
+  //   // let res = await fetch('https://api.jsonbin.io/b/5cdd1762dbffad51f8aa85a5')
+  //   let res = await fetch(`./data.js`)
+  //   console.log(res)
+  //   mutations.setQuizVersion(res.version)
+  //   mutations.setQuestions(res.questions)
+  // },
+  fetchData () {
+    mutations.setQuizVersion(quiz.version)
+    mutations.setQuestions(quiz.questions)
   }
 };

@@ -42,18 +42,10 @@
             v-for="(answer, i) in questions[currentQuestion-1].options"
             :key="i"
           >
-            <!-- <button
-              class="quiz-question-button"
-              :class="{
-                'correct': usersAnswer === answer && answer === questions[currentQuestion-1].correct ,
-                'wrong': usersAnswer === answer && usersAnswer !== questions[currentQuestion-1].correct
-              }"
-              @click="handleAnswer(answer)"
-            >{{moviesTitles[answer-1]}}</button> -->
             <button
               class="quiz-question-button"
               :class="{
-                'correct': usersAnswer === answer && answer === questions[currentQuestion-1].correct ,
+                'correct': usersAnswer === answer && answer === questions[currentQuestion-1].correct,
                 'wrong': usersAnswer === answer && usersAnswer !== questions[currentQuestion-1].correct
               }"
               @click="handleAnswer(answer)"
@@ -84,7 +76,7 @@ export default {
     return {
       loading: true,
       usersAnswer: null,
-      welcomeImg: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/512px-Unofficial_JavaScript_logo_2.svg.png'
+      welcomeImg: require('../assets/js-logo.svg')
     };
   },
   computed: {
@@ -270,7 +262,7 @@ export default {
 }
 @media (min-width: 600px) {
   .quiz-heading {
-    margin: -40px 0 30px;
+    /* margin: -40px 0 30px; */
     font-size: 1.5rem;
     text-shadow: 1px 1px 2px #020815;
   }

@@ -34,8 +34,9 @@ export default {
 @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css");
 
 code {
-  color: #cda869;
-  // color: #42b883;
+  // color: #cda869;
+  color: white;
+  font-weight: bolder;
   text-shadow: initial;
   border-radius: 3px;
   font-family: "Merriweather";

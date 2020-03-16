@@ -84,11 +84,15 @@ export default function parse(md, prevLinks) {
       }
       inner = parse(outdent(token[5].replace(/^\s*[>*+.-]/gm, "")));
       if (t === ">") t = "blockquote";
+      // else {
+      //   t = t.match(/\./) ? "ol" : "ul";
+      //   inner = inner.replace(/^(.*)(\n|$)/gm, "<li>$1</li>");
+      // }
+      // chunk = "<" + t + ">" + inner + "</" + t + ">";
       else {
-        t = t.match(/\./) ? "ol" : "ul";
-        inner = inner.replace(/^(.*)(\n|$)/gm, "<li>$1</li>");
+        inner = inner.replace(/^(.*)(\n|$)/gm, "$1");
       }
-      chunk = "<" + t + ">" + inner + "</" + t + ">";
+      chunk = t + " " + inner + "</" + t + ">";
     }
     // Images:
     else if (token[8]) {
