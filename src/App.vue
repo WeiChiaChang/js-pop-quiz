@@ -84,7 +84,7 @@ export default {
           store.user.displayName ||
           store.user.email.substring(0, store.user.email.indexOf('@'))
         const objToDb = {
-          answerCount: store.currentQuestion,
+          answerCount: store.currentQuestion - 1,
           amount: store.questions.length,
           startTime: store.startTime,
           endTime: store.endTime,

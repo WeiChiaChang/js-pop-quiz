@@ -1,0 +1,13 @@
+{
+  "rules": {
+    "scores": {
+      ".read": true,
+      ".write": "auth != null",
+      ".indexOn": "answerCount"
+    },
+    "users": {
+      ".read": false,
+      ".write": "auth != null"
+    }
+  }
+}
