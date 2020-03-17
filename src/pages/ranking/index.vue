@@ -17,7 +17,8 @@
         </h4>
       </div>
     </div>
-    <h1>High Scores (top 10)</h1>
+    <!-- <h1>Top 10 JavaScripters</h1> -->
+    <h1>Rankings</h1>
     <div class="scores-container">
       <div class="score-row" v-for="(score, index) in highScores" :key="index">
         <h2 class="score-number">#{{index+1}}</h2>

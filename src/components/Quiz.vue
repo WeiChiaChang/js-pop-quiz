@@ -20,7 +20,7 @@
         <h1
           v-if="stage === 'quiz'"
           class="quiz-heading"
-          v-html="snarkdown(questions[currentQuestion-1].title)"
+          v-html="questions[currentQuestion-1].title !== null ? snarkdown(questions[currentQuestion-1].title) : questions[currentQuestion-1].title"
         ></h1>
         <a
           href="#start-quiz"
@@ -29,7 +29,11 @@
           v-if="stage === 'welcome'"
         >開始測驗</a>
         <div v-if="stage === 'results'">{{correctAnswers}} / {{questions.length}}</div>
-        <div class="explanation_text" v-if="stage === 'results'" v-html="snarkdown(quizExplanation)"></div>
+        <div
+          class="explanation_text"
+          v-if="stage === 'results'"
+          v-html="quizExplanation !== null ? snarkdown(quizExplanation) : quizExplanation"
+        ></div>
         <p
           class="quiz-result"
           v-if="stage === 'results'"
@@ -55,7 +59,7 @@
                 'wrong': usersAnswer === i && usersAnswer !== questions[currentQuestion-1].options.findIndex(i => i.correct === true)
               }"
               @click="handleAnswer(i, answer.correct, questions[currentQuestion-1].explanation)"
-              v-html="snarkdown(answer.text)"
+              v-html="answer.text !== null ? snarkdown(answer.text) : answer.text"
             ></button>
           </li>
         </ul>

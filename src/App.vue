@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <transition mode="out-in">
-      <router-view v-on:save-score="saveScore" />
+      <router-view @save-score="saveScore" />
     </transition>
     <login-view
       v-on:log-in="logIn"
