@@ -23,17 +23,16 @@
           class="dropdown-item"
           v-if="routePath === '/'"
           v-on:click.native="closeDropdown"
-        >High scores</div>
+        >📈 High scores</div>
         <div
           @click="$router.push({ name: 'home' })"
           class="dropdown-item"
           v-if="routePath === '/ranking'"
           v-on:click.native="closeDropdown"
-        >Play the game</div>
+        >🕹 Play the game</div>
+        <!-- <div class="dropdown-divider" /> -->
+        <a target="_blank" href="https://github.com/WeiChiaChang" class="dropdown-item">💻 Source code</a>
         <a href="#" class="dropdown-item" v-on:click="logOut">Sign out</a>
-        <div class="dropdown-divider">
-        </div>
-        <a target="_blank" href="https://github.com/WeiChiaChang" class="dropdown-item">Source code</a>
       </div>
     </div>
   </div>

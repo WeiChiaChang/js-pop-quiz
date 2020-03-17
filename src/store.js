@@ -10,6 +10,7 @@ export const store = Vue.observable({
   currentQuestion: null,
   answers: [],
   // Firebase
+  answerCount: 0,
   user: null,
   amount: 0,
   currentLogo: {},

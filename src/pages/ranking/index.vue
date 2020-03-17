@@ -18,13 +18,18 @@
       </div>
     </div>
     <!-- <h1>Top 10 JavaScripters</h1> -->
-    <h1>Rankings</h1>
+    <h1 class="ranking_title">Rankings</h1>
     <div class="scores-container">
       <div class="score-row" v-for="(score, index) in highScores" :key="index">
         <h2 class="score-number">#{{index+1}}</h2>
         <div class="score-row-details">
-          <h3>{{score.name || 'Anonymous'}}</h3>
-          <span class="extra-detail">{{score.answerCount}} / {{score.amount}}</span>
+          <div class="avatar_wrapper">
+            <img :src="score.avatar" alt="">
+          </div>
+          <div class="user_info">
+            <div class="user_name">{{score.name || 'Anonymous'}}</div>
+            <span class="extra-detail">{{score.answerCount}} / {{score.amount}}</span>
+          </div>
         </div>
       </div>
       <div v-if="highScores.length === 0">
@@ -42,11 +47,14 @@ export default {
     highScores() {
       return store.highScores
     }
+  },
+  mounted () {
+    this.highScores
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .container {
   max-width: 100%;
   height: 76vh;
@@ -60,9 +68,48 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin: 4px 0;
+}
+.ranking_title {
+  font-family: 'Press Start 2P', cursive;
 }
 .score-row-details {
+  // border: 1px solid;
+  // * {
+  //   border: 1px solid;
+  // }
   max-width: calc(100% - 40px);
+  display: flex;
+  align-items: center;
+  .avatar_wrapper {
+    img {
+      width: 60px;
+      margin-right: 12px;
+      border-radius: 50%;
+    }
+  }
+  .user_info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    // font-family: 'Press Start 2P', cursive;
+    .user_name {
+      font-weight: bolder;
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      width: 130px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: left;
+    }
+    .extra-detail {
+      display: block;
+      text-align: left;
+      margin-left: 0px;
+      color: #bbbbbb;
+    }
+  }
 }
 .score-row-details > h3 {
   width: 200px;
@@ -72,14 +119,10 @@ export default {
 .score-number {
   margin-right: 8px;
   margin-top: 15px;
-  width: 50px;
+  width: 75px;
+  font-family: 'Press Start 2P', cursive;
 }
-.extra-detail {
-  display: block;
-  text-align: left;
-  margin-left: 0px;
-  color: #bbbbbb;
-}
+
 h1 {
   border-bottom: 1px solid;
   width: 600px;

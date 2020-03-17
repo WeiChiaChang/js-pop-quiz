@@ -14,7 +14,7 @@
         <a href="https://github.com/lydiahallie/javascript-questions" target="_blank">Lydia Hallie</a>
       </span> -->
     </header>
-    <Quiz />
+    <Quiz @save-score="$emit('save-score')" />
   </div>
 </template>
 

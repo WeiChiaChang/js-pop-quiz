@@ -58,7 +58,9 @@ export default {
       })
     },
     firebase: function () {
-      firebase.initializeApp(firebaseConfig)
+      if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig)
+      }
       firebase.auth().onAuthStateChanged((user) => {
         if (user) {
           firebase.database().ref('users/' + user.uid).set({
@@ -75,7 +77,6 @@ export default {
       })
     },
     saveScore: function () {
-      console.log('r')
       // Save only logged in users scores
       if (store.user) {
         // Make object of values as it might change before saving
@@ -83,11 +84,12 @@ export default {
           store.user.displayName ||
           store.user.email.substring(0, store.user.email.indexOf('@'))
         const objToDb = {
-          answerCount: store.answerCount,
-          amount: store.amount,
+          answerCount: store.currentQuestion,
+          amount: store.questions.length,
           startTime: store.startTime,
           endTime: store.endTime,
-          name: name
+          name: name,
+          avatar: store.user.photoURL
         }
         // See if there is a previous score
         firebase.database().ref('/scores/' + store.user.uid).once('value').then((snapshot) => {
@@ -102,7 +104,7 @@ export default {
       const higherScore = newScore.answerCount > oldScore.answerCount
       const sameScore = newScore.answerCount === oldScore.answerCount
       const betterTime = (newScore.endTime - newScore.startTime) < (oldScore.endTime - oldScore.startTime)
-      const isNotCheating = (newScore.endTime - newScore.startTime) > (store.answerCount * 1000)
+      const isNotCheating = (newScore.endTime - newScore.startTime) > (store.currentQuestion * 1000)
       return isNotCheating && (higherScore || (sameScore && betterTime))
     },
     getHighScores: function () {
