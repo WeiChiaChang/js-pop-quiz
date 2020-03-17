@@ -202,7 +202,11 @@ export default {
         //   this.initResultsStage();
         // }
         if (isCorrect) {
-          this.goToQuestion(nextQuestion);
+          if (nextQuestion <= this.questions.length) {
+            this.goToQuestion(nextQuestion);
+          } else {
+            this.initResultsStage();
+          }
         } else {
           this.initResultsStage();
         }
