@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="flex">
-      <router-link to="/">
+      <div @click="$router.push({ name: 'home' })">
         <h4 class="go_home">
           <svg
             fill="#FFFFFF"
@@ -15,7 +15,7 @@
           </svg>
           Play the game
         </h4>
-      </router-link>
+      </div>
     </div>
     <h1>High Scores (top 10)</h1>
     <div class="scores-container">

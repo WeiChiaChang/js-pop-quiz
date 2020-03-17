@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view v-on:save-score="saveScore" />
+    <transition mode="out-in">
+      <router-view v-on:save-score="saveScore" />
+    </transition>
     <login-view
       v-on:log-in="logIn"
       v-on:log-out="logOut"
@@ -168,5 +170,25 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+}
+
+// Transition
+.v-leave {
+  opacity: 1;
+}
+.v-leave-active {
+  transition: opacity 0.5s;
+}
+.v-leave-to {
+  opacity: 0;
+}
+.v-enter {
+  opacity: 0;
+}
+.v-enter-active {
+  transition: opacity 0.5s;
+}
+.v-enter-to {
+  opacity: 1;
 }
 </style>

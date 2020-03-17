@@ -18,18 +18,18 @@
         </div>
         <div class="dropdown-divider">
         </div>
-        <router-link
-          to="/ranking"
+        <div
+          @click="$router.push({ name: 'ranking' })"
           class="dropdown-item"
           v-if="routePath === '/'"
           v-on:click.native="closeDropdown"
-        >High scores</router-link>
-        <router-link
-          to="/"
+        >High scores</div>
+        <div
+          @click="$router.push({ name: 'home' })"
           class="dropdown-item"
           v-if="routePath === '/ranking'"
           v-on:click.native="closeDropdown"
-        >Play the game</router-link>
+        >Play the game</div>
         <a href="#" class="dropdown-item" v-on:click="logOut">Sign out</a>
         <div class="dropdown-divider">
         </div>
@@ -177,6 +177,7 @@ svg {
   color: white;
   text-overflow: ellipsis;
   white-space: nowrap;
+  cursor: pointer;
 }
 .dropdown-item:hover {
   color: #fff;
