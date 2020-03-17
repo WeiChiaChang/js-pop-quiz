@@ -72,6 +72,7 @@ import { store, mutations, actions } from "../store"
 import { version as appVersion } from "../../package.json"
 import Code from './Code'
 import snarkdown from '../utils/snarkdown'
+import Kanahei from '../utils/kanahei'
 
 export default {
   name: "Quiz",
@@ -198,6 +199,8 @@ export default {
       mutations.addAnswer(answerIndex);
       const nextQuestion = +this.currentQuestion + 1;
 
+      if (isCorrect) Kanahei()
+
       setTimeout(() => {
         // if (nextQuestion <= this.questions.length) {
         //   this.goToQuestion(nextQuestion);
@@ -243,7 +246,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .explanation_text {
   height: 240px;
   overflow-y: scroll;
@@ -253,6 +256,9 @@ export default {
   text-align: justify;
   line-height: 1.5rem;
   color: darkgray;
+  img {
+    margin: 12px 0;
+  }
 }
 .quiz {
   position: relative;
