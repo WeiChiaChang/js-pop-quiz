@@ -29,6 +29,7 @@
           v-if="stage === 'welcome'"
         >開始測驗</a>
         <div v-if="stage === 'results'">{{correctAnswers}} / {{questions.length}}</div>
+        <div class="explanation_text" v-if="stage === 'results'" v-html="snarkdown(quizExplanation)"></div>
         <p
           class="quiz-result"
           v-if="stage === 'results'"
@@ -53,7 +54,7 @@
                 'correct': usersAnswer === i && usersAnswer === questions[currentQuestion-1].options.findIndex(i => i.correct === true),
                 'wrong': usersAnswer === i && usersAnswer !== questions[currentQuestion-1].options.findIndex(i => i.correct === true)
               }"
-              @click="handleAnswer(i, answer.correct)"
+              @click="handleAnswer(i, answer.correct, questions[currentQuestion-1].explanation)"
               v-html="snarkdown(answer.text)"
             ></button>
           </li>
@@ -81,6 +82,7 @@ export default {
     return {
       loading: true,
       usersAnswer: null,
+      quizExplanation: null,
       welcomeImg: require('../assets/js-logo.svg')
     };
   },
@@ -189,9 +191,10 @@ export default {
 
       this.loading = false;
     },
-    handleAnswer (answerIndex, isCorrect) {
+    handleAnswer (answerIndex, isCorrect, text) {
       if (this.usersAnswer !== null) return;
       this.usersAnswer = answerIndex;
+      this.quizExplanation = text
       mutations.addAnswer(answerIndex);
       const nextQuestion = +this.currentQuestion + 1;
 
@@ -241,6 +244,16 @@ export default {
 </script>
 
 <style>
+.explanation_text {
+  height: 240px;
+  overflow-y: scroll;
+  background-color: #181e24;
+  border-radius: 4px;
+  padding: 15px 20px;
+  text-align: justify;
+  line-height: 1.5rem;
+  color: darkgray;
+}
 .quiz {
   position: relative;
   width: 100%;
