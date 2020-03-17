@@ -114,7 +114,7 @@ button {
 }
 @media screen and (max-width:447px) {
   .login-root {
-    right: 0;
+    right: 10px;
   }
   button {
     width: 70px;

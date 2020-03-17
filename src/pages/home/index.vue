@@ -1,18 +1,18 @@
 <template>
   <div class="wrapper">
     <header class="app-header">
-      <span class="app-header-text">
+      <!-- <span class="app-header-text">
         Show on
         <a href="https://github.com/WeiChiaChang/pop-quiz">GitHub</a>
-      </span>
-      <h1 class="app-heading">
-        <img src="../../assets/js-logo.svg" alt="">
-        <span>Pop Quiz</span>
-      </h1>
+      </span> -->
       <!-- <span class="app-header-text">
         Thanks To
         <a href="https://github.com/lydiahallie/javascript-questions" target="_blank">Lydia Hallie</a>
       </span> -->
+      <h1 class="app-heading">
+        <img src="../../assets/js-logo.svg" alt="">
+        <span>Pop Quiz</span>
+      </h1>
     </header>
     <Quiz @save-score="$emit('save-score')" />
   </div>
@@ -58,7 +58,7 @@ export default {
   display: flex;
   align-items: center;
   position: absolute;
-  top: 50px;
+  top: 30px;
   left: 50%;
   margin: 0;
   padding-left: 20px;
