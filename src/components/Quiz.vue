@@ -27,14 +27,19 @@
           class="quiz-button"
           @click.prevent="initQuizStage"
           v-if="stage === 'welcome'"
-        >Start Quiz</a>
-        <p class="quiz-result" v-if="stage === 'results'" v-html="resultsInfo.text"></p>
+        >開始測驗</a>
+        <div v-if="stage === 'results'">{{correctAnswers}} / {{questions.length}}</div>
+        <p
+          class="quiz-result"
+          v-if="stage === 'results'"
+          v-html="resultsInfo.text"
+        ></p>
         <a
           href="#restart-quiz"
           class="quiz-button"
           @click.prevent="initWelcomeStage"
           v-if="stage === 'results'"
-        >Try again</a>
+        >再試一次吧？</a>
 
         <ul class="quiz-questions" v-if="stage === 'quiz'">
           <li
@@ -48,7 +53,7 @@
                 'correct': usersAnswer === i && usersAnswer === questions[currentQuestion-1].options.findIndex(i => i.correct === true),
                 'wrong': usersAnswer === i && usersAnswer !== questions[currentQuestion-1].options.findIndex(i => i.correct === true)
               }"
-              @click="handleAnswer(i)"
+              @click="handleAnswer(i, answer.correct)"
               v-html="snarkdown(answer.text)"
             ></button>
           </li>
@@ -100,7 +105,7 @@ export default {
       if (this.correctAnswers < 10) {
         return {
           text:
-            "Practice, practice, practice! <br>You'll be a clever as Dumbledore in no time!",
+            "JavaScript 和 Java 的關係就如同火跟火腿 <br>而你連一條火腿都比不上",
           img:
             "https://media0.giphy.com/media/720g7C1jz13wI/giphy.gif?cid=3640f6095c869951776a4a7a5110b5dc"
         };
@@ -120,7 +125,7 @@ export default {
           img: "https://media.giphy.com/media/TGLLaCKWwxUVq/giphy.gif"
         };
       }
-      if (this.correctAnswers === 20) {
+      if (this.correctAnswers === this.questions.length) {
         return {
           text:
             "TOP MARKS! Nice work! <br>You have some serious wizard wisdom!",
@@ -184,14 +189,19 @@ export default {
 
       this.loading = false;
     },
-    handleAnswer (answerIndex) {
+    handleAnswer (answerIndex, isCorrect) {
       if (this.usersAnswer !== null) return;
       this.usersAnswer = answerIndex;
       mutations.addAnswer(answerIndex);
       const nextQuestion = +this.currentQuestion + 1;
 
       setTimeout(() => {
-        if (nextQuestion <= this.questions.length) {
+        // if (nextQuestion <= this.questions.length) {
+        //   this.goToQuestion(nextQuestion);
+        // } else {
+        //   this.initResultsStage();
+        // }
+        if (isCorrect) {
           this.goToQuestion(nextQuestion);
         } else {
           this.initResultsStage();
@@ -274,7 +284,8 @@ export default {
 .quiz-result {
   margin: 20px 0;
   font-size: 12px;
-  line-height: 1.4;
+  line-height: 1.4rem;
+  letter-spacing: 1px;
 }
 @media (min-width: 600px) {
   .quiz-result {
