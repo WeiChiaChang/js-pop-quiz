@@ -72,7 +72,7 @@ import { store, mutations, actions } from "../store"
 import { version as appVersion } from "../../package.json"
 import Code from './Code'
 import snarkdown from '../utils/snarkdown'
-import Kanahei from '../utils/kanahei'
+// import Kanahei from '../utils/kanahei'
 
 export default {
   name: "Quiz",
@@ -199,7 +199,8 @@ export default {
       mutations.addAnswer(answerIndex);
       const nextQuestion = +this.currentQuestion + 1;
 
-      if (isCorrect) Kanahei()
+      // Easter Egg
+      // if (isCorrect) Kanahei()
 
       setTimeout(() => {
         // if (nextQuestion <= this.questions.length) {

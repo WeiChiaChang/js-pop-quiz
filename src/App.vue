@@ -1,30 +1,117 @@
 <template>
-  <div class="app">
-    <header class="app-header">
-      <span class="app-header-text">
-        Show on
-        <a href="https://github.com/WeiChiaChang/pop-quiz">GitHub</a>
-      </span>
-      <h1 class="app-heading">
-        <img src="./assets/js-logo.svg" alt="">
-        <span>Pop Quiz</span>
-      </h1>
-      <span class="app-header-text">
-        Thanks To
-        <a href="https://github.com/lydiahallie/javascript-questions" target="_blank">Lydia Hallie</a>
-      </span>
-    </header>
-    <Quiz />
+  <div id="app">
+    <router-view v-on:save-score="saveScore"></router-view>
   </div>
 </template>
 
 <script>
-import Quiz from './components/Quiz.vue'
+import { store, mutations } from "./store"
+
+import * as firebase from 'firebase'
+import 'firebase/auth'
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyDVBX2F2W56MIZL7XKUgYtBQp_IVfInG78',
+  authDomain: 'js-pop-quiz.firebaseapp.com',
+  databaseURL: 'https://js-pop-quiz.firebaseio.com',
+  storageBucket: 'js-pop-quiz.appspot.com'
+}
 
 export default {
   name: "app",
   components: {
-    Quiz
+  },
+  created: function () {
+    this.firebase()
+
+    if (this.routePath === '/ranking') {
+      this.getHighScores()
+    }
+  },
+  computed: {
+    routePath () {
+      return this.$route.path
+    }
+  },
+  watch: {
+    routePath: function (path) {
+      if (path === '/ranking' && store.highScores.length === 0) {
+        this.getHighScores()
+      }
+    }
+  },
+  methods: {
+    firebase: function () {
+      firebase.initializeApp(firebaseConfig)
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          firebase.database().ref('users/' + user.uid).set({
+            name: user.displayName,
+            email: user.email,
+            photo_url: user.photoURL
+          }).then(() => {
+            mutations.setUser(user)
+            mutations.setFirebaseFeedback()
+          })
+        } else {
+          mutations.setFirebaseFeedback()
+        }
+      })
+    },
+    saveScore: function () {
+      // Save only logged in users scores
+      if (store.user) {
+        // Make object of values as it might change before saving
+        const name = 
+          store.user.displayName ||
+          store.user.email.substring(0, store.user.email.indexOf('@'))
+        const objToDb = {
+          answerCount: store.answerCount,
+          amount: store.amount,
+          startTime: store.startTime,
+          endTime: store.endTime,
+          name: name
+        }
+        // See if there is a previous score
+        firebase.database().ref('/scores/' + store.user.uid).once('value').then((snapshot) => {
+          const previousScore = snapshot.val()
+          if (!previousScore || (previousScore && this.shouldSaveNewScore(objToDb, previousScore))) {
+            firebase.database().ref('scores/' + store.user.uid).set(objToDb)
+          }
+        })
+      }
+    },
+    shouldSaveNewScore: function (newScore, oldScore) {
+      const higherScore = newScore.answerCount > oldScore.answerCount
+      const sameScore = newScore.answerCount === oldScore.answerCount
+      const betterTime = (newScore.endTime - newScore.startTime) < (oldScore.endTime - oldScore.startTime)
+      const isNotCheating = (newScore.endTime - newScore.startTime) > (store.answerCount * 1000)
+      return isNotCheating && (higherScore || (sameScore && betterTime))
+    },
+    getHighScores: function () {
+      firebase.database()
+        .ref('/scores')
+        .orderByChild('answerCount')
+        .limitToLast(10)
+        .once('value')
+        .then((snapshot) => {
+          if (snapshot.val()) {
+            const highScores = Object.keys(snapshot.val())
+              .map((k) => snapshot.val()[k])
+              .sort((a, b) => {
+                if (a.answerCount > b.answerCount) {
+                  return -1
+                } else if (b.answerCount > a.answerCount) {
+                  return 1
+                } else {
+                  return 0
+                }
+              })
+            mutations.setHighScores(highScores)
+          }
+        }
+      )
+    }
   }
 };
 </script>
@@ -56,7 +143,7 @@ body {
   color: #eee;
 }
 
-.app {
+#app {
   min-height: 100%;
   padding: 95px 15px 30px;
   display: flex;
@@ -66,62 +153,5 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-}
-.app-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 95px;
-  padding: 15px;
-  display: flex;
-  justify-content: space-between;
-  font-size: 11px;
-}
-.app-header a {
-  color: #eee;
-  text-decoration: none;
-  border-bottom: 1px solid rgba(238, 238, 238, 0.5);
-}
-.app-heading {
-  display: flex;
-  align-items: center;
-  position: absolute;
-  top: 50px;
-  left: 50%;
-  margin: 0;
-  padding-left: 20px;
-  font-size: 14px;
-  line-height: 15px;
-  transform: translateX(-50%);
-  cursor: default;
-  user-select: none;
-  img {
-    margin-right: 8px;
-  }
-}
-@media (min-width: 600px) {
-  .app-header {
-    height: 90px;
-    padding: 30px 15px;
-    align-items: center;
-  }
-  .app-heading {
-    top: 30px;
-  }
-}
-.app-heading-icon {
-  position: absolute;
-  top: 1px;
-  left: -5px;
-  fill: #eee;
-  width: 26px;
-  height: 26px;
-}
-.app-heading span {
-  display: block;
-}
-.app-header-text {
-  opacity: 0.5;
 }
 </style>

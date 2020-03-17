@@ -8,7 +8,18 @@ export const store = Vue.observable({
   img: null,
   questions: [],
   currentQuestion: null,
-  answers: []
+  answers: [],
+  // Firebase
+  user: null,
+  amount: 0,
+  currentLogo: {},
+  previousLogo: {},
+  options: [],
+  gameFinished: false,
+  startTime: new Date().getTime(),
+  endTime: 0,
+  highScores: [],
+  firebaseFeedback: false
 });
 
 export const mutations = {
@@ -38,6 +49,17 @@ export const mutations = {
   },
   resetAnswers() {
     store.answers = []
+  },
+  // Firebase
+  setUser(user) {
+    store.user = user
+  },
+  setHighScores(scores) {
+    store.highScores = scores
+  },
+  setFirebaseFeedback() {
+    const feedback = true
+    store.firebaseFeedback = feedback
   }
 };
 
