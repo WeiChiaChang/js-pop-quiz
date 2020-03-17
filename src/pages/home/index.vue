@@ -14,36 +14,18 @@
         <a href="https://github.com/lydiahallie/javascript-questions" target="_blank">Lydia Hallie</a>
       </span> -->
     </header>
-    <login-view
-      v-on:log-in="logIn"
-      v-on:log-out="logOut"
-    ></login-view>
     <Quiz />
   </div>
 </template>
 
 <script>
-import { mutations } from "../../store"
-
-import * as firebase from 'firebase'
-
 import Quiz from '../../components/Quiz.vue'
-import LoginView from '../../components/LoginView'
 
 export default {
   components: {
     Quiz,
-    LoginView
   },
   methods: {
-    logIn: function () {
-      firebase.auth().signInWithRedirect(new firebase.auth.GithubAuthProvider())
-    },
-    logOut: function () {
-      firebase.auth().signOut().then(() => {
-        mutations.setUser(null)
-      })
-    },
   }
 }
 </script>

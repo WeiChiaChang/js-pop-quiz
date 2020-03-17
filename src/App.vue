@@ -1,11 +1,16 @@
 <template>
   <div id="app">
-    <router-view v-on:save-score="saveScore"></router-view>
+    <router-view v-on:save-score="saveScore" />
+    <login-view
+      v-on:log-in="logIn"
+      v-on:log-out="logOut"
+    ></login-view>
   </div>
 </template>
 
 <script>
 import { store, mutations } from "./store"
+import LoginView from './components/LoginView'
 
 import * as firebase from 'firebase'
 import 'firebase/auth'
@@ -18,8 +23,9 @@ const firebaseConfig = {
 }
 
 export default {
-  name: "app",
+  name: "App",
   components: {
+    LoginView
   },
   created: function () {
     this.firebase()
@@ -41,6 +47,14 @@ export default {
     }
   },
   methods: {
+    logIn: function () {
+      firebase.auth().signInWithRedirect(new firebase.auth.GithubAuthProvider())
+    },
+    logOut: function () {
+      firebase.auth().signOut().then(() => {
+        mutations.setUser(null)
+      })
+    },
     firebase: function () {
       firebase.initializeApp(firebaseConfig)
       firebase.auth().onAuthStateChanged((user) => {
@@ -59,6 +73,7 @@ export default {
       })
     },
     saveScore: function () {
+      console.log('r')
       // Save only logged in users scores
       if (store.user) {
         // Make object of values as it might change before saving

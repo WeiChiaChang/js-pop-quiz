@@ -212,9 +212,11 @@ export default {
           if (nextQuestion <= this.questions.length) {
             this.goToQuestion(nextQuestion);
           } else {
+            this.$emit('save-score')
             this.initResultsStage();
           }
         } else {
+          this.$emit('save-score')
           this.initResultsStage();
         }
       }, 500);
