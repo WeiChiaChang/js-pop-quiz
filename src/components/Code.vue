@@ -35,6 +35,7 @@ export default {
 	background-color: rgb(24, 30, 36);
 	border-radius: 4px;
 	padding: 15px 20px;
+	font-family: "Merriweather";
 }
 /deep/ pre {
 	text-align: initial;

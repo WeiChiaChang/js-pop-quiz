@@ -139,17 +139,21 @@ export default {
 @import url("https://fonts.googleapis.com/css?family=Merriweather:400,700");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css");
 
+@font-face {
+  font-family: "jf-openhuninn";
+  src: url('./assets/jf-openhuninn-1.0.ttf');
+}
+
+* {
+  box-sizing: border-box;
+}
+
 code {
   // color: #cda869;
   color: white;
   font-weight: bolder;
   text-shadow: initial;
   border-radius: 3px;
-  font-family: "Merriweather";
-}
-
-* {
-  box-sizing: border-box;
 }
 
 html {

@@ -60,7 +60,7 @@ a {
   border-radius: 5px;
   transition: 25ms ease-out;
   padding: 0.5em 0.75em;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-family: "jf-openhuninn";
 }
 .resp-sharing-button__icon svg {
   width: 1em;

@@ -284,6 +284,11 @@ export default {
 </script>
 
 <style lang="scss">
+@font-face {
+  font-family: "jf-openhuninn";
+  src: url('../assets/jf-openhuninn-1.0.ttf');
+}
+
 .chart_icon {
   cursor: pointer;
   margin-left: 8px;
@@ -306,6 +311,7 @@ a {
 }
 .final_score {
   font-size: 2rem;
+  font-family: "jf-openhuninn";
 }
 .explanation_text {
   height: 240px;
@@ -363,6 +369,7 @@ a {
   margin: 20px 0;
   font-size: 1.5rem;
   line-height: 1.8;
+  font-family: "jf-openhuninn";
 }
 @media (min-width: 600px) {
   .quiz-heading {
@@ -416,10 +423,14 @@ a {
   border-radius: 0;
   background: transparent;
   color: #eee;
-  font-size: 0.8rem;
+  font-size: 1rem;
+  code {
+    font-size: 1rem;
+  }
   cursor: pointer;
   transition: border-color 0.5s, background 0.5s;
   outline: none;
+  font-family: "jf-openhuninn";
 }
 
 .quiz-question-button.correct {

@@ -66,6 +66,7 @@ export default {
   line-height: 15px;
   transform: translateX(-50%);
   cursor: default;
+  font-family: "jf-openhuninn";
   user-select: none;
   img {
     margin-right: 8px;

@@ -17,7 +17,7 @@
 一不留神真的會不小心寫出很烙賽的 Code，
 不管是自己檢測或是給學生測試看看，相信都是很好的練習！
 
-另外這個專案雖然多數還是英文描述為主，但中文部分則是採用近期知名的台灣字型製作團隊 [justfont](https://justfont.com/about/) 所推出的 [開源字型 jf open 粉圓體](https://justfont.com/huninn/)！畫面非常之軟Ｑ啊！大力大力推薦大家快去自己的 Side Project 用起來～～
+另外這個專案雖然多數還是英文描述為主，但字型部分則是完全採用近期知名的台灣字型製作團隊 [justfont](https://justfont.com/about/) 所推出的 [開源字型 jf open 粉圓體](https://justfont.com/huninn/)！畫面非常之軟Ｑ啊！大力大力推薦大家快去自己的 Side Project 用起來～～
 
 **[快來測驗你的 JavaScript 技能吧！](https://js-pop-quiz.now.sh)**
 

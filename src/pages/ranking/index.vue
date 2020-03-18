@@ -60,6 +60,7 @@ export default {
   position: absolute;
   top: 22px;
   left: 20px;
+  font-family: "jf-openhuninn";
 }
 .container {
   max-width: 100%;
@@ -86,6 +87,7 @@ export default {
   // * {
   //   border: 1px solid;
   // }
+  font-family: "jf-openhuninn";
   max-width: calc(100% - 40px);
   display: flex;
   align-items: center;

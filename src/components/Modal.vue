@@ -100,6 +100,7 @@ export default {
   text-align: justify;
   line-height: 1.5rem;
   color: darkgray;
+  font-family: "jf-openhuninn";
   img {
     margin: 12px 0;
   }

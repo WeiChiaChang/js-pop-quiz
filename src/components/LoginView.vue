@@ -98,6 +98,7 @@ export default {
   position: absolute;
   top: 16px;
   right: 20px;
+  font-family: "jf-openhuninn";
 }
 button {
 	/* width: 140px; */
