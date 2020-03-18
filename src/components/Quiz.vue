@@ -60,7 +60,7 @@
           class="quiz-button"
           @click.prevent="initWelcomeStage"
           v-if="stage === 'results'"
-        >Try Again？</a>
+        >再試一次嗎？</a>
         <sharing-btn v-if="stage !== 'quiz'" />
         <ul class="quiz-questions" v-if="stage === 'quiz'">
           <li
@@ -302,6 +302,7 @@ a {
 .modal_why {
   font-size: 1.2rem;
   cursor: pointer;
+  font-family: "jf-openhuninn";
 }
 .final_score {
   font-size: 2rem;
@@ -311,6 +312,7 @@ a {
   overflow-y: scroll;
   background-color: #181e24;
   border-radius: 4px;
+  // font-family: "jf-openhuninn";
   padding: 15px 20px;
   text-align: justify;
   line-height: 1.5rem;
@@ -375,6 +377,7 @@ a {
   font-size: 12px;
   line-height: 1.4rem;
   letter-spacing: 1px;
+  font-family: "jf-openhuninn";
 }
 @media (min-width: 600px) {
   .quiz-result {
@@ -391,6 +394,7 @@ a {
   color: #eee;
   text-decoration: none;
   transition: border-color 0.5s;
+  font-family: "jf-openhuninn";
 }
 .quiz-button:hover {
   border-color: #eee;
