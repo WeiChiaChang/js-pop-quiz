@@ -127,19 +127,25 @@ export default {
           img: require("../assets/kumamon.png")
         }
       }
-      if (this.correctAnswers < 15) {
+      if (this.correctAnswers < 20) {
         return {
-          text: "對了，我們最近剛把 CTO 外包出去<br>想調薪？哈哈哈哈 ...",
+          text: "對了，我們最近剛把 CTO 外包出去<br>想調薪嗎？哈哈哈哈 ...",
           img: require("../assets/ricardo.gif")
         }
       }
-      if (this.correctAnswers < 20) {
+      if (this.correctAnswers < 30) {
         return {
-          text: '這點成績也敢拿出來說嘴嗎?<br><a href="https://medium.com/@p5d12000/%E6%80%8E%E6%A8%A3%E6%BA%96%E5%82%99%E6%8A%80%E8%A1%93%E9%9D%A2%E8%A9%A6-263dce21b814" target="_blank"><span class="highlight_wording">工程師幹話</span></a>讀起來!',
+          text: "你有夢想我幫你！想成為自己的老闆嗎？<br>來，這裡有張自願離職表",
+          img: require("../assets/js-weird.png")
+        }
+      }
+      if (this.correctAnswers < 40) {
+        return {
+          text: '這點成績也敢拿出來說嘴嗎?<br><a href="https://medium.com/@p5d12000/%E6%80%8E%E6%A8%A3%E6%BA%96%E5%82%99%E6%8A%80%E8%A1%93%E9%9D%A2%E8%A9%A6-263dce21b814" target="_blank"><span class="highlight_wording">工程師幹話</span></a>背起來!',
           img: require("../assets/kid.gif")
         }
       }
-      if (this.correctAnswers > 20) {
+      if (this.correctAnswers > 40) {
         return {
           text: "別躲了！ 像你這樣出色的開發者，無論在什麼地方<br>都像漆黑中的螢火蟲一樣，那樣的鮮明，那樣的出眾",
           img: require("../assets/coder.png")
