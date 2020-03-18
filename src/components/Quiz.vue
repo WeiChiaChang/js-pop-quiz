@@ -53,7 +53,7 @@
           @click.prevent="initWelcomeStage"
           v-if="stage === 'results'"
         >Try Again？</a>
-
+        <sharing-btn v-if="stage !== 'quiz'" />
         <ul class="quiz-questions" v-if="stage === 'quiz'">
           <li
             class="quiz-question"
@@ -85,13 +85,15 @@ import { version as appVersion } from "../../package.json"
 import Code from './Code'
 import snarkdown from '../utils/snarkdown'
 import ExplanationModal from '../components/Modal'
+import SharingBtn from '../components/SharingBtn'
 // import Kanahei from '../utils/kanahei'
 
 export default {
   name: "Quiz",
   components: {
     Code,
-    ExplanationModal
+    ExplanationModal,
+    SharingBtn
   },
   data() {
     return {
@@ -367,6 +369,7 @@ a {
 .quiz-button {
   display: inline-block;
   padding: 10px 30px;
+  margin-bottom: 4px;
   border: 1px solid rgba(238, 238, 238, 0.3);
   color: #eee;
   text-decoration: none;
