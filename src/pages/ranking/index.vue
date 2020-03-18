@@ -1,22 +1,5 @@
 <template>
   <div class="container">
-    <div class="flex">
-      <div @click="$router.push({ name: 'home' })">
-        <h4 class="go_home">
-          <svg
-            fill="#FFFFFF"
-            height="24"
-            viewBox="0 0 24 16"
-            width="24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M0 0h24v24H0z" fill="none" />
-            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-          </svg>
-          Play the game
-        </h4>
-      </div>
-    </div>
     <!-- <h1>Top 10 JavaScripters</h1> -->
     <h1 class="ranking_title">Rankings</h1>
     <div class="scores-container">
@@ -36,6 +19,24 @@
         <h3>Loading...</h3>
       </div>
     </div>
+    <!-- Go Back -->
+    <div class="go_back_wrapper">
+    <div @click="$router.push({ name: 'home' })">
+      <div class="go_home">
+        <svg
+          fill="#FFFFFF"
+          height="24"
+          viewBox="0 0 24 16"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M0 0h24v24H0z" fill="none" />
+          <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+        </svg>
+        Play the game
+      </div>
+    </div>
+  </div>
   </div>
 </template>
 
@@ -55,6 +56,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.go_back_wrapper {
+  position: absolute;
+  top: 25px;
+  left: 20px;
+}
 .container {
   max-width: 100%;
   height: 76vh;

@@ -37,6 +37,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 95px 15px 30px;
 }
 .app-header {
   position: absolute;

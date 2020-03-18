@@ -23,15 +23,15 @@
           class="dropdown-item"
           v-if="routePath === '/'"
           v-on:click.native="closeDropdown"
-        >📈 High scores</div>
+        >📈 排行榜</div>
         <div
           @click="$router.push({ name: 'home' })"
           class="dropdown-item"
           v-if="routePath === '/ranking'"
           v-on:click.native="closeDropdown"
-        >🕹 Play the game</div>
+        >🕹 玩起來耶～</div>
         <!-- <div class="dropdown-divider" /> -->
-        <a target="_blank" href="https://github.com/WeiChiaChang" class="dropdown-item">💻 Source code</a>
+        <a target="_blank" href="https://github.com/WeiChiaChang" class="dropdown-item">💻 原始碼點我</a>
         <a href="#" class="dropdown-item" v-on:click="logOut">Sign out</a>
       </div>
     </div>
@@ -152,7 +152,7 @@ svg {
   text-align: left;
   font-size: 14px;
   border: 1px solid rgba(128, 117, 117, 0.42);
-  z-index: 2;
+  z-index: 9999999;
 }
 .dropdown-menu::after{
   top: -14px;

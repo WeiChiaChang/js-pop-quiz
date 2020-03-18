@@ -4,18 +4,13 @@
       <div :key="currentQuestion">
         <div class="quiz-counter" v-if="stage === 'quiz'">{{currentQuestion}} / {{questions.length}}</div>
         <div class="welcome_img_wrapper">
-          <img
-            v-if="stage === 'welcome'"
-            class="quiz-img"
-            :src="welcomeImg"
-            alt=""
-          >
+          <img v-if="stage === 'welcome'" class="quiz-img" :src="welcomeImg" alt />
         </div>
         <!-- <Picture
           v-if="stage === 'welcome'"
           class="quiz-img"
           :url="welcomeImg"
-        /> -->
+        />-->
         <Code v-if="stage === 'quiz'" :code="questions[currentQuestion-1].code" />
         <h1
           v-if="stage === 'quiz'"
@@ -28,17 +23,30 @@
           @click.prevent="initQuizStage"
           v-if="stage === 'welcome'"
         >開始測驗</a>
-        <div v-if="stage === 'results'">{{correctAnswers}} / {{questions.length}}</div>
-        <div
+        <span
+          class="modal_why"
+          v-if="stage === 'results'"
+          @click="toggleModal"
+        >點我看解釋</span>
+        <!-- Modal -->
+        <explanation-modal
+          :content="quizExplanation"
+          :visible="showModal"
+          @close="showModal = false"
+        />
+        <!-- <div
           class="explanation_text"
           v-if="stage === 'results'"
           v-html="quizExplanation !== null ? snarkdown(quizExplanation) : quizExplanation"
-        ></div>
-        <p
-          class="quiz-result"
+        ></div>-->
+        <div class="result_img" v-if="stage === 'results'">
+          <img :src="resultsInfo.img" alt />
+        </div>
+        <div
+          class="final_score"
           v-if="stage === 'results'"
-          v-html="resultsInfo.text"
-        ></p>
+        >{{correctAnswers}} / {{questions.length}}</div>
+        <p class="quiz-result" v-if="stage === 'results'" v-html="resultsInfo.text"></p>
         <a
           href="#restart-quiz"
           class="quiz-button"
@@ -76,19 +84,25 @@ import { store, mutations, actions } from "../store"
 import { version as appVersion } from "../../package.json"
 import Code from './Code'
 import snarkdown from '../utils/snarkdown'
+import ExplanationModal from '../components/Modal'
 // import Kanahei from '../utils/kanahei'
 
 export default {
   name: "Quiz",
   components: {
-    Code
+    Code,
+    ExplanationModal
   },
-  data () {
+  data() {
     return {
       loading: true,
       usersAnswer: null,
-      quizExplanation: null,
-      welcomeImg: require('../assets/js-logo.svg')
+      quizExplanation: null || localStorage.explanation || 'I have nothing to say.',
+      welcomeImg: require('../assets/js-logo.svg'),
+      modal: {
+        content: null
+      },
+      showModal: false
     };
   },
   computed: {
@@ -97,6 +111,7 @@ export default {
     img: () => store.img,
     questions: () => store.questions,
     currentQuestion: () => store.currentQuestion,
+    explanation: () => store.explanation,
     answers: () => store.answers,
     correctAnswers() {
       let count = 0;
@@ -108,35 +123,25 @@ export default {
       });
       return count;
     },
-    resultsInfo () {
+    resultsInfo() {
       if (this.correctAnswers < 10) {
         return {
-          text:
-            "JavaScript 和 Java 的關係就如同火跟火腿 <br>而你連一條火腿都比不上",
-          img:
-            "https://media0.giphy.com/media/720g7C1jz13wI/giphy.gif?cid=3640f6095c869951776a4a7a5110b5dc"
-        };
-      }
-      if (this.correctAnswers < 15) {
-        return {
-          text:
-            "Not too shabby! <br>Have a Harry Potter movie marathon and then try again!",
-          img:
-            "https://media2.giphy.com/media/UeeJAeey9GJjO/giphy.gif?cid=3640f6095c869e703631634241b759c1"
+          text: "JavaScript 和 Java 的關係就如同火跟火腿 <br>而你連一條火腿都比不上",
+          img: require("../assets/kumamon.png")
         };
       }
       if (this.correctAnswers < 20) {
         return {
           text:
             "Very good! <br>Have another go and you'll be getting full marks!",
-          img: "https://media.giphy.com/media/TGLLaCKWwxUVq/giphy.gif"
+          img: "https://upload.cc/i1/2020/03/18/jqACxd.jpeg"
         };
       }
       if (this.correctAnswers === this.questions.length) {
         return {
           text:
             "TOP MARKS! Nice work! <br>You have some serious wizard wisdom!",
-          img: "https://media.giphy.com/media/9H279yb0blggo/giphy.gif"
+          img: "https://upload.cc/i1/2020/03/18/vVUFB3.png"
         };
       } else {
         return {}
@@ -144,10 +149,14 @@ export default {
     }
   },
   methods: {
-    async fetchData () {
+    // Explanation Modal
+    toggleModal() {
+      this.showModal = !this.showModal;
+    },
+    async fetchData() {
       await actions.fetchData();
     },
-    async init () {
+    async init() {
       await this.fetchData();
       if (
         !localStorage.stage ||
@@ -162,7 +171,7 @@ export default {
         this.initResultsStage();
       }
     },
-    initWelcomeStage () {
+    initWelcomeStage() {
       mutations.setStage("welcome");
       mutations.setTitle("How Well Do You Know <br>JavaScript ?");
       mutations.setImg(this.welcomeImg);
@@ -174,7 +183,7 @@ export default {
 
       this.loading = false;
     },
-    initQuizStage (currentQuestion) {
+    initQuizStage(currentQuestion) {
       mutations.setStage("quiz");
       mutations.setTitle("Which movie is this?");
       mutations.setAnswers(
@@ -185,7 +194,7 @@ export default {
 
       this.loading = false;
     },
-    initResultsStage () {
+    initResultsStage() {
       mutations.setStage("results");
       mutations.setAnswers(localStorage.answers.split(","));
       mutations.setTitle(
@@ -196,11 +205,12 @@ export default {
 
       this.loading = false;
     },
-    handleAnswer (answerIndex, isCorrect, text) {
+    handleAnswer(answerIndex, isCorrect, text) {
       if (this.usersAnswer !== null) return;
       this.usersAnswer = answerIndex;
       this.quizExplanation = text
       mutations.addAnswer(answerIndex);
+      mutations.setExplanation(text);
       const nextQuestion = +this.currentQuestion + 1;
 
       // Easter Egg
@@ -225,14 +235,14 @@ export default {
         }
       }, 500);
     },
-    goToQuestion (i) {
+    goToQuestion(i) {
       this.usersAnswer = null;
 
       const img = this.questions[i - 1].img;
       mutations.setImg(img);
       mutations.setCurrentQuestion(i);
     },
-    snarkdown (text) {
+    snarkdown(text) {
       return snarkdown(text)
     }
   },
@@ -245,6 +255,9 @@ export default {
     },
     currentQuestion(val) {
       localStorage.currentQuestion = val;
+    },
+    explanation(text) {
+      localStorage.explanation = text
     }
   },
   async mounted() {
@@ -254,6 +267,13 @@ export default {
 </script>
 
 <style lang="scss">
+.modal_why {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.final_score {
+  font-size: 2rem;
+}
 .explanation_text {
   height: 240px;
   overflow-y: scroll;
@@ -271,6 +291,13 @@ export default {
   position: relative;
   width: 100%;
   max-width: 500px;
+}
+
+.result_img {
+  img {
+    margin: 15px 0;
+    width: 300px;
+  }
 }
 
 .quiz-counter {
@@ -352,7 +379,7 @@ export default {
   border-radius: 0;
   background: transparent;
   color: #eee;
-  font-size: .8rem;
+  font-size: 0.8rem;
   cursor: pointer;
   transition: border-color 0.5s, background 0.5s;
   outline: none;

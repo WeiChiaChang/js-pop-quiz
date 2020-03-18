@@ -164,7 +164,7 @@ body {
 
 #app {
   min-height: 100%;
-  padding: 95px 15px 30px;
+  // padding: 95px 15px 30px;
   display: flex;
   align-items: center;
   justify-content: center;

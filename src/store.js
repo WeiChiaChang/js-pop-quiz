@@ -9,6 +9,7 @@ export const store = Vue.observable({
   questions: [],
   currentQuestion: null,
   answers: [],
+  explanation: null,
   // Firebase
   answerCount: 0,
   user: null,
@@ -44,6 +45,9 @@ export const mutations = {
   },
   addAnswer(answer) {
     store.answers.push(answer)
+  },
+  setExplanation(text) {
+    store.explanation = text
   },
   setAnswers(answers) {
     store.answers = answers
