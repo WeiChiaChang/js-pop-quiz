@@ -39,11 +39,21 @@ export default {
   computed: {
     routePath () {
       return this.$route.path
+    },
+    correctAnswers() {
+      let count = 0;
+      store.questions.forEach((q, i) => {
+        if (q.options.findIndex(item => item.correct === true) == store.answers[i]) {
+          count++
+        }
+        // if (q.correct == this.answers[i]) count++;
+      });
+      return count;
     }
   },
   watch: {
     routePath: function (path) {
-      if (path === '/ranking' && store.highScores.length === 0) {
+      if (path === '/ranking') {
         this.getHighScores()
       }
     }
@@ -84,7 +94,7 @@ export default {
           store.user.displayName ||
           store.user.email.substring(0, store.user.email.indexOf('@'))
         const objToDb = {
-          answerCount: store.currentQuestion - 1,
+          answerCount: this.correctAnswers,
           amount: store.questions.length,
           startTime: store.startTime,
           endTime: store.endTime,
