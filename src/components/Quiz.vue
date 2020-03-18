@@ -94,7 +94,7 @@ import Code from './Code'
 import snarkdown from '../utils/snarkdown'
 import ExplanationModal from '../components/Modal'
 import SharingBtn from '../components/SharingBtn'
-// import Kanahei from '../utils/kanahei'
+import Kanahei from '../utils/kanahei'
 
 export default {
   name: "Quiz",
@@ -231,7 +231,7 @@ export default {
       const nextQuestion = +this.currentQuestion + 1;
 
       // Easter Egg
-      // if (isCorrect) Kanahei()
+      if (isCorrect) Kanahei()
 
       setTimeout(() => {
         // if (nextQuestion <= this.questions.length) {

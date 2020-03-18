@@ -7,17 +7,17 @@ export default function kanahei () {
     img.style.transition = '1s all';
     img.style.position = 'fixed';
     img.style.left = 'calc(50% - 160px)';
-    img.style.bottom = '-300px';
+    img.style.top = '-300px';
     img.style.zIndex = 999999;
 
     document.body.appendChild(img)
 
     setTimeout(function () {
-      img.style.bottom = '-20px';
+      img.style.top = '-20px';
       // img.style.bottom = '0px';
     }, 30);
     setTimeout(function () {
-      img.style.bottom = '-350px';
+      img.style.top = '-350px';
     }, 1200);
     setTimeout(function () {
       img.parentNode.removeChild(img);
