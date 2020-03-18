@@ -33,6 +33,7 @@
           :content="quizExplanation"
           :visible="showModal"
           @close="showModal = false"
+          v-scroll-lock="showModal"
         />
         <!-- <div
           class="explanation_text"
