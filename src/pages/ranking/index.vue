@@ -78,7 +78,8 @@ export default {
 }
 .ranking_title {
   font-family: 'Press Start 2P', cursive;
-  margin-top: 20px;
+  margin-top: 50px;
+  font-size: 28px;
 }
 .score-row-details {
   // border: 1px solid;
