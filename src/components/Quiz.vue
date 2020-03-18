@@ -45,7 +45,15 @@
         <div
           class="final_score"
           v-if="stage === 'results'"
-        >{{correctAnswers}} / {{questions.length}}</div>
+        >
+          {{correctAnswers}} / {{questions.length}}
+          <span
+            class="chart_icon"
+            @click="$router.push({ name: 'ranking' })"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart"><line x1="12" y1="20" x2="12" y2="10"></line><line x1="18" y1="20" x2="18" y2="4"></line><line x1="6" y1="20" x2="6" y2="16"></line></svg>
+          </span>
+        </div>
         <p class="quiz-result" v-if="stage === 'results'" v-html="resultsInfo.text"></p>
         <a
           href="#restart-quiz"
@@ -276,6 +284,15 @@ export default {
 </script>
 
 <style lang="scss">
+.chart_icon {
+  cursor: pointer;
+  margin-left: 8px;
+  svg {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+  }
+}
 a {
   text-decoration: none;
 }
