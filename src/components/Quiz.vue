@@ -347,6 +347,7 @@ a {
   transform: translateX(-50%);
   text-shadow: 1px 1px 2px #020815;
   font-size: 14px;
+  font-family: "jf-openhuninn";
 }
 @media (min-width: 600px) {
   .quiz-counter {
