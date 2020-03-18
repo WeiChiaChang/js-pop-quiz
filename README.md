@@ -30,6 +30,10 @@ npm run build
 npm run lint
 ```
 
+## PRs Welcome 🙏
+
+- 繁體中文版本 Traditional Chinese Version
+
 ## Reference
 
 - Great thanks to [Lydia Hallie](https://github.com/lydiahallie) for creating awesome [javascript-questions](https://github.com/lydiahallie/javascript-questions)

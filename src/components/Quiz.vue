@@ -52,7 +52,7 @@
           class="quiz-button"
           @click.prevent="initWelcomeStage"
           v-if="stage === 'results'"
-        >再試一次吧？</a>
+        >Try Again？</a>
 
         <ul class="quiz-questions" v-if="stage === 'quiz'">
           <li
@@ -125,21 +125,25 @@ export default {
         return {
           text: "JavaScript 和 Java 的關係就如同火跟火腿 <br>而你連一條火腿都比不上",
           img: require("../assets/kumamon.png")
-        };
+        }
+      }
+      if (this.correctAnswers < 15) {
+        return {
+          text: "對了，我們最近剛把 CTO 外包出去<br>想調薪？哈哈哈哈 ...",
+          img: require("../assets/ricardo.gif")
+        }
       }
       if (this.correctAnswers < 20) {
         return {
-          text:
-            "Very good! <br>Have another go and you'll be getting full marks!",
-          img: "https://upload.cc/i1/2020/03/18/jqACxd.jpeg"
-        };
+          text: '這點成績也敢拿出來說嘴嗎?<br><a href="https://medium.com/@p5d12000/%E6%80%8E%E6%A8%A3%E6%BA%96%E5%82%99%E6%8A%80%E8%A1%93%E9%9D%A2%E8%A9%A6-263dce21b814" target="_blank"><span class="highlight_wording">工程師幹話</span></a>讀起來!',
+          img: require("../assets/kid.gif")
+        }
       }
-      if (this.correctAnswers === this.questions.length) {
+      if (this.correctAnswers > 20) {
         return {
-          text:
-            "TOP MARKS! Nice work! <br>You have some serious wizard wisdom!",
-          img: "https://upload.cc/i1/2020/03/18/vVUFB3.png"
-        };
+          text: "別躲了！ 像你這樣出色的開發者，無論在什麼地方<br>都像漆黑中的螢火蟲一樣，那樣的鮮明，那樣的出眾",
+          img: require("../assets/coder.png")
+        }
       } else {
         return {}
       }
@@ -264,6 +268,12 @@ export default {
 </script>
 
 <style lang="scss">
+a {
+  text-decoration: none;
+}
+.highlight_wording {
+  color: rgb(3, 135, 199);
+}
 .modal_why {
   font-size: 1.2rem;
   cursor: pointer;
