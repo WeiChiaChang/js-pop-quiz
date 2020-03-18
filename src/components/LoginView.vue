@@ -96,7 +96,7 @@ export default {
 <style scoped>
 .login-root {
   position: absolute;
-  top: 20px;
+  top: 16px;
   right: 20px;
 }
 button {

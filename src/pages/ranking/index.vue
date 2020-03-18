@@ -58,7 +58,7 @@ export default {
 <style lang="scss" scoped>
 .go_back_wrapper {
   position: absolute;
-  top: 25px;
+  top: 22px;
   left: 20px;
 }
 .container {
