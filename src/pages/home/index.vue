@@ -2,10 +2,6 @@
   <div class="wrapper">
     <header class="app-header">
       <!-- <span class="app-header-text">
-        Show on
-        <a href="https://github.com/WeiChiaChang/pop-quiz">GitHub</a>
-      </span> -->
-      <!-- <span class="app-header-text">
         Thanks To
         <a href="https://github.com/lydiahallie/javascript-questions" target="_blank">Lydia Hallie</a>
       </span> -->
@@ -14,16 +10,19 @@
         <span>Pop Quiz</span>
       </h1>
     </header>
+    <github-corner v-if="$route.path !== '/ranking'" />
     <Quiz @save-score="$emit('save-score')" />
   </div>
 </template>
 
 <script>
 import Quiz from '../../components/Quiz.vue'
+import GithubCorner from '../../components/GithubCorner.vue'
 
 export default {
   components: {
     Quiz,
+    GithubCorner
   },
   methods: {
   }
