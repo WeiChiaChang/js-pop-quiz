@@ -91,6 +91,7 @@ export default {
   max-width: calc(100% - 40px);
   display: flex;
   align-items: center;
+  margin-bottom: 8px;
   .avatar_wrapper {
     img {
       width: 60px;

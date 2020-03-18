@@ -131,6 +131,14 @@ export default {
         }
       )
     }
+  },
+  mounted () {
+    window.onblur = function() {
+      document.title = "金城武快回來啊～"
+    }
+    window.onfocus = function() {
+      document.title = "JavaScript Pop Quiz"
+    }
   }
 };
 </script>
