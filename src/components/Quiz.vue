@@ -99,9 +99,6 @@ export default {
       usersAnswer: null,
       quizExplanation: null || localStorage.explanation || 'I have nothing to say.',
       welcomeImg: require('../assets/js-logo.svg'),
-      modal: {
-        content: null
-      },
       showModal: false
     };
   },
