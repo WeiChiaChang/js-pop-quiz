@@ -1416,7 +1416,7 @@ export default {
     {
       id: 57,
       title: "57. What's the output?",
-      code: "// counter.js\nlet counter = 10;\nexport default counter;",
+      code: "// counter.js\nlet counter = 10;\nexport default counter;\n\n\n // index.js\nimport myCounter from './counter';\n\nmyCounter += 1;\n\nconsole.log(myCounter);",
       options: [
         {
           correct: false,
