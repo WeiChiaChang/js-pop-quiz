@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "firebase": "^7.11.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "prismjs": "^1.19.0",
     "sass-loader": "^8.0.2",
     "v-scroll-lock": "^1.1.0",
